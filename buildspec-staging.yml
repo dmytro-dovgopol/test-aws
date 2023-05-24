@@ -15,18 +15,22 @@ phases:
       - npm run test
       - echo "Running e2e tests..."
       - npm run test:e2e
-      - echo "Adding ecr credentials..."
+      - echo "Preparing ECR..."
       - REPOSITORY_URI=public.ecr.aws/d1z0u8i5/qwerty-ecr
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
 
   build:
     commands:
       - echo "Running docker build phase..."
       - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
 
   post_build:
     commands:
       - echo "Running post_build phase:"
       - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name":"qwerty-image","imageUri":"%s"}]' $REPOSITORY_URI > imagedefinitions.json
 
