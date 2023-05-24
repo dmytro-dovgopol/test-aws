@@ -13,9 +13,9 @@ phases:
       - echo "Running build phase..."
       - npm run build
 
-  test:
+  post_build:
     commands:
-      - echo "Running test phase:"
+      - echo "Running post_build phase:"
       - echo "Running unit tests..."
       - npm run test
       - echo "Running e2e tests..."
