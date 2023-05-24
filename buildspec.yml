@@ -2,13 +2,25 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
     commands:
-      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
-      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
-  pre_build:
-    commands:
-      - docker build -t helloworld .
+      - echo "Running install phase..."
+      - npm install
+
   build:
     commands:
-      - docker images
-      - docker run helloworld echo "Hello, World!" 
+      - echo "Running build phase..."
+      - npm run build
+
+  test:
+    commands:
+      - echo "Running test phase:"
+      - echo "Running unit tests..."
+      - npm run test
+      - echo "Running e2e tests..."
+      - npm run test:e2e
+
+artifacts:
+  files:
+    - '**/*'
