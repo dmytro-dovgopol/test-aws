@@ -8,18 +8,18 @@ phases:
       - echo "Running install phase..."
       - npm install
 
-  build:
-    commands:
-      - echo "Running build phase..."
-      - npm run build
-
-  post_build:
+  pre_build:
     commands:
       - echo "Running post_build phase:"
       - echo "Running unit tests..."
       - npm run test
       - echo "Running e2e tests..."
       - npm run test:e2e
+
+  build:
+    commands:
+      - echo "Running build phase..."
+      - npm run build
 
 artifacts:
   files:
