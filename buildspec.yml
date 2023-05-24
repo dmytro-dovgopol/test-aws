@@ -26,3 +26,4 @@ artifacts:
     - '**/*'
   exclude:
     - node_modules/**/*
+    - node modules/**/*
