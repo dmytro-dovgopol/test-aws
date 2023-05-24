@@ -21,7 +21,7 @@ phases:
   build:
     commands:
       - echo "Running docker build phase..."
-      - - docker build -t $REPOSITORY_URI:latest .
+      - docker build -t $REPOSITORY_URI:latest .
 
   post_build:
     commands:
