@@ -3,9 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws --version
-      - aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin public.ecr.aws
       - REPOSITORY_URI=public.ecr.aws/d1z0u8i5/qwerty-ecr
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
