@@ -35,4 +35,5 @@ phases:
       - printf '[{"name":"qwerty-image","imageUri":"%s"}]' $REPOSITORY_URI > imagedefinitions.json
 
 artifacts:
-    files: imagedefinitions.json
+    files:
+      - imagedefinitions.json
