@@ -31,7 +31,7 @@ phases:
       - echo "Running post_build phase:"
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Writing image definitions file...
+      - echo "Writing image definitions file...""
       - printf '[{"name":"qwerty-image","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 
   artifacts:
