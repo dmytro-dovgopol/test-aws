@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Running install phase..."
+      - npm install
+
+  build:
+    commands:
+      - echo "Running build phase..."
+      - npm run build
+
+  post_build:
+    commands:
+      - echo "Running post build phase..."
+      - find . -mindepth 1 ! -path './build*' -delete
+      - mv build/* .
+      - mv build/.[!.]* .
+      - rm -r build
+
+artifacts:
+  files:
+    - '**/*'
