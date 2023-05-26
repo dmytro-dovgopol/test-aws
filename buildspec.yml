@@ -18,7 +18,6 @@ phases:
       - echo "Running post build phase..."
       - find . -mindepth 1 ! -path './build*' -delete
       - mv build/* .
-      - mv build/.[!.]* .
       - rm -r build
 
 artifacts:
